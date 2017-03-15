@@ -1,11 +1,9 @@
 import React from 'react'
-import NewTweet from './NewTweet'
-import TweetList from './TweetList'
+import MainPanel from './MainPanel'
 
 const App = () => (
   <div className="container">
-    <NewTweet />
-    <TweetList />
+    <MainPanel />
   </div>
 )
 
