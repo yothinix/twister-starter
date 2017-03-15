@@ -1,13 +1,9 @@
 import React from 'react'
-import Tweet from './Tweet'
+import TweetList from './TweetList'
 
 const App = () => (
   <div className="container">
-    <Tweet
-      name="Yothin M"
-      username="yothinix"
-      tweet="Lorem ipsum, dorosit armet"
-    />
+    <TweetList />
   </div>
 )
 
