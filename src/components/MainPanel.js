@@ -7,8 +7,8 @@ class MainPanel extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: 'Banana Apple',
-      username: 'banana',
+      name: 'Yothinix @ ProntoTools',
+      username: 'yothinix',
       tweets: [
         {
           id: 0,
