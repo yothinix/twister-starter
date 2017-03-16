@@ -2,7 +2,21 @@ import React from 'react'
 
 const ProfileFollow = props => (
   <div className="action last-section">
-    <input type="button" className="btn btn-default btn-lg" value="Follow" />
+    { props.isFollowing ? (
+      <input
+        type="button"
+        className="btn btn-default btn-lg"
+        value="Follow"
+        onClick={props.handleToggleFollow}
+      />
+    ) : (
+      <input
+        type="button"
+        className="btn btn-default btn-lg"
+        value="Follow"
+        onClick={props.handleToggleFollow}
+      />
+    )}
   </div>
 )
 
