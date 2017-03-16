@@ -1,5 +1,6 @@
 import React from 'react'
 
+import config from '../config'
 import NewTweet from './NewTweet'
 import TweetList from './TweetList'
 
@@ -9,22 +10,23 @@ class MainPanel extends React.Component {
     this.state = {
       name: 'Yothinix @ ProntoTools',
       username: 'yothinix',
-      tweets: [
-        {
-          id: 0,
-          name: 'Supasate Choochaisri',
-          username: 'kaizerwing',
-          tweetText: 'Lorem Ipsum ...',
-        },
-        {
-          id: 1,
-          name: 'Arnupharp Viratanapanu',
-          username: 'topscores',
-          tweetText: 'Lorem Ipsum ...',
-        },
-      ],
+      tweets: [],
     }
     this.addToTweetList = this.addToTweetList.bind(this)
+  }
+
+  componentDidMount() {
+    const uri = `http://${config.api.host}:${config.api.port}/api/tweets`
+    const filter = `{ "where": { "username": "${this.state.username}" }}`
+    fetch(`${uri}?filter=${filter}`, {
+      mode: 'cors',
+    })
+    .then(response => response.json())
+    .then((tweets) => {
+      this.setState({
+        tweets: tweets,
+      })
+    })
   }
 
   addToTweetList(tweet) {
@@ -38,6 +40,7 @@ class MainPanel extends React.Component {
       ],
     })
   }
+
 
   render() {
     const { name, username, tweets } = this.state
@@ -55,9 +58,9 @@ class MainPanel extends React.Component {
 }
 
 MainPanel.propTypes = {
-  name: React.PropTypes.string,
-  username: React.PropTypes.string,
-  tweets: React.PropTypes.arrayOf(React.PropTypes.object),
+  name: React.PropTypes.string.isRequired,
+  username: React.PropTypes.string.isRequired,
+  tweets: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
 }
 
 export default MainPanel
