@@ -3,7 +3,7 @@ import BodyContainer from './BodyContainer'
 
 const App = () => (
   <BodyContainer
-    ownerUsername={''}
+    ownerUsername={'kaizerwing'}
     enableTweet
   />
 )

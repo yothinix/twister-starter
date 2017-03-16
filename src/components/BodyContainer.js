@@ -1,5 +1,6 @@
 import React from 'react'
 import config from '../config'
+import { fetchTweets, fetchProfile, fetchFollowStatus } from '../helpers'
 import Profile from './Profile'
 import MainPanel from './MainPanel'
 
@@ -8,7 +9,7 @@ class BodyContainer extends React.Component {
     super(props)
     this.state = {
       name: 'Yothin M',
-      username: 'yothinix',
+      username: 'kaizerwing',
       tweets: [],
       numTweets: 789,
       numFollowers: 123,
@@ -19,17 +20,21 @@ class BodyContainer extends React.Component {
   }
 
   componentDidMount() {
-    const uri = `http://${config.api.host}:${config.api.port}/api/tweets`
-    const filter = `{ "where": { "username": "${this.state.username}" }}`
-    fetch(`${uri}?filter=${filter}`, {
-      mode: 'cors',
-    })
-    .then(response => response.json())
-    .then((tweets) => {
-      this.setState({
-        tweets: tweets,
+    let fetchedData = {}
+    fetchTweets(this.state.username)
+      .then(tweets => { fetchedData.tweets = tweets })
+      .then(() => fetchProfile(this.state.username))
+      .then(profile => {
+        fetchedData.name = profile.name
+        fetchedData.numTweets = profile.numTweets
+        fetchedData.numFollowers = profile.numFollowers
+        fetchedData.numFollowings = profile.numFollowings
       })
-    })
+      .then(() => fetchFollowStatus(this.state.username, this.props.ownerUsername))
+      .then(status => {
+        fetchedData.isFollowing = status
+        this.setState(fetchedData)
+      })
   }
 
   addToTweetList(tweet) {
