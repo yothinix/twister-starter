@@ -46,11 +46,12 @@ class MainPanel extends React.Component {
     const { name, username, tweets } = this.state
     return (
       <div className="main-panel">
-        <NewTweet
-          name={name}
-          username={username}
-          addToTweetList={this.addToTweetList}
-        />
+        {this.props.enableTweet
+         ? <NewTweet
+            name={name}
+            username={username}
+            addToTweetList={this.addToTweetList}
+        /> : null}
         <TweetList tweets={tweets} />
       </div>
     )
@@ -61,6 +62,7 @@ MainPanel.propTypes = {
   name: React.PropTypes.string.isRequired,
   username: React.PropTypes.string.isRequired,
   tweets: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  enableTweet: React.PropTypes.bool.isRequired,
 }
 
 export default MainPanel
