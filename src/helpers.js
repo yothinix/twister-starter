@@ -1,4 +1,4 @@
-import config from './config'
+import config from './config/index.template'
 
 const serverIp = config.api.host
 const port = config.api.port

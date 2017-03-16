@@ -1,6 +1,6 @@
 export default {
   api: {
-    host: '<SERVER IP>',
-    port: '<SERVER PORT>',
+    host: '150.107.29.233',
+    port: '3030',
   },
 }
